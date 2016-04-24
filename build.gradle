@@ -1,0 +1,41 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'war'
+
+repositories {
+    maven {
+      url "http://repo1.maven.org/maven2"
+    }
+
+    /*mavenCentral{ url "http://repo1.maven.org/maven2"}
+    mavenLocal()*/
+}
+
+
+
+dependencies {
+    testCompile 'junit:junit:4.11'
+    providedCompile fileTree(dir: System.getenv("CATALINA_HOME")+'/lib', include: '*.jar')
+   	compile 'org.springframework.boot:spring-boot-starter-web:1.3.0.RELEASE'
+   	compile 'org.springframework:spring-tx:4.2.3.RELEASE'
+   	//compile 'org.apache.taglibs:taglibs-standard-spec:1.2.5'
+   	compile 'javax.servlet:jstl:1.2'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+        }
+    }
+    test {
+        java {
+            srcDir 'src/test/java'
+        }
+    }
+}
+
+
+tasks.withType(JavaCompile) {  
+    options.encoding = "UTF-8"  
+}
