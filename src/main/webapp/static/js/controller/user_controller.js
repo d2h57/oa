@@ -1,12 +1,12 @@
 'use strict';
  
-App.controller('UserController', ['$scope', 'UserService', function($scope, UserService) {
+App.controller('UserController', ['$scope', 'userService', function($scope, userService) {
           var self = this;
           self.user={id:null,username:'',address:'',email:''};
           self.users=[];
                
           self.fetchAllUsers = function(){
-              UserService.fetchAllUsers()
+              userService.fetchAllUsers()
                   .then(
                                function(d) {
                                     self.users = d;
@@ -18,7 +18,7 @@ App.controller('UserController', ['$scope', 'UserService', function($scope, User
           };
             
           self.createUser = function(user){
-              UserService.createUser(user)
+              userService.createUser(user)
                       .then(
                       self.fetchAllUsers, 
                               function(errResponse){
@@ -28,7 +28,7 @@ App.controller('UserController', ['$scope', 'UserService', function($scope, User
           };
  
          self.updateUser = function(user, id){
-              UserService.updateUser(user, id)
+              userService.updateUser(user, id)
                       .then(
                               self.fetchAllUsers, 
                               function(errResponse){
@@ -38,7 +38,7 @@ App.controller('UserController', ['$scope', 'UserService', function($scope, User
           };
  
          self.deleteUser = function(id){
-              UserService.deleteUser(id)
+              userService.deleteUser(id)
                       .then(
                               self.fetchAllUsers, 
                               function(errResponse){
