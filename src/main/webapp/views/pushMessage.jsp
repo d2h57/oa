@@ -2,14 +2,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>Push Message To JPush</title>
 <link rel="stylesheet" href="<c:url value='/static/css/app.css'/>">
 <link rel="stylesheet" href="<c:url value='/3rd/bootstrap/dist/css/bootstrap.min.css'/>">
 </head>
-<body ng-app="messageModule" class="ng-cloak">
+<body ng-app="miscModule" class="ng-cloak">
 	<div class="generic-container" ng-controller="PushMessageController as ctrl">
           <div class="panel panel-default">
               <div class="panel-heading"><span class="lead">Push Message Form </span></div>
@@ -41,7 +41,18 @@
                           <div class="form-group col-md-12">
                               <label class="col-md-2 control-lable" for="address">AppName</label>
                               <div class="col-md-7">
-                                 <select ng-model="ctrl.payload.selected" ng-options="m.name for m in ctrl.model" class="form-control" readonly>
+                                 <select ng-model="ctrl.payload.appId" ng-options="m.name for m in ctrl.app" class="form-control" readonly required>
+								    <option value="">-- 请选择 --</option>
+								</select>
+                              </div>
+                          </div>
+                      </div>
+                      
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="address">MsgType</label>
+                              <div class="col-md-7">
+                                 <select ng-model="ctrl.payload.msgType" ng-options="m.name for m in ctrl.msg" class="form-control" readonly required>
 								    <option value="">-- 请选择 --</option>
 								</select>
                               </div>
@@ -60,7 +71,7 @@
       </div>
        
       <script src="<c:url value='/3rd/angular/angular.js'/>"></script>
-      <script src="<c:url value='/static/js/message_module.js'/>"></script>
+      <script src="<c:url value='/static/js/misc_module.js'/>"></script>
       <script src="<c:url value='/static/js/service/push_message_service.js'/>"></script>
       <script src="<c:url value='/static/js/controller/push_message_controller.js'/>"></script>
 </body>

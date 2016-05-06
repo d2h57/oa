@@ -3,11 +3,11 @@
  */
 'use strict';
  
-MessageModule.factory('pushMessageService', ['$http', '$q', function($http, $q){
+MiscModule.factory('pushMessageService', function($http, $q){
  
     return {
     	pushMessage: function(payload) {
-                    return $http.post('http://localhost:8080/oa/misc/message',payload)
+                    return $http.post('http://192.168.2.177:9090/oa/misc/message',payload)
                             .then(
                                     function(response){
                                         return response.data;
@@ -19,5 +19,4 @@ MessageModule.factory('pushMessageService', ['$http', '$q', function($http, $q){
                             );
             }
     };
- 
-}]);
+});

@@ -1,5 +1,7 @@
 package com.dy.oa.controller;
 
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +15,7 @@ import com.dy.oa.service.MessageService;
 @Controller
 @RequestMapping("/misc")
 public class MiscController {
+	@Resource
 	private transient MessageService service;
 	
 	@RequestMapping(method = RequestMethod.GET)
@@ -22,8 +25,9 @@ public class MiscController {
 	
 	@RequestMapping(value = "/message", method = RequestMethod.POST)
 	@ResponseBody
-    public  ResponseMessage createUser(@RequestBody Message message) {
+    public  ResponseMessage addMessage(@RequestBody Message message) throws Exception {
 		ResponseMessage response = ResponseMessage.createDefault();
+		service.addMessage(message);
 		response.setResult(0);
 		return response;
     }

@@ -1,6 +1,7 @@
 package com.dy.oa.configuration;
 
 import javax.servlet.Filter;
+import javax.servlet.ServletRegistration;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
@@ -25,4 +26,10 @@ public class OaInitializer extends AbstractAnnotationConfigDispatcherServletInit
         Filter [] singleton = { new CORSFilter() };
         return singleton;
     }
+    
+    @Override
+    protected void customizeRegistration(ServletRegistration.Dynamic registration) {
+    	registration.setInitParameter("contextConfigLocation", "classpath:config/applicationContext.xml");
+    	registration.setInitParameter("log4jConfigLocation", "classpath:config/log4j.properties");
+	}
 }
