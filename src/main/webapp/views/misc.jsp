@@ -69,10 +69,40 @@
               </div>
           </div>
       </div>
+      
+      <div class="generic-container" ng-controller="DeviceController as ctrl">
+          <div class="panel panel-default">
+              <div class="panel-heading"><span class="lead">Device Form </span></div>
+              <div class="formcontainer">
+                  <form ng-submit="ctrl.submit()" name="deviceForm" class="form-horizontal">
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="uname">Device Id</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="ctrl.device.id" id="id" class="form-control input-sm" placeholder="Enter The DeviceId" required ng-minlength="3"/>
+                                  <div class="has-error" ng-show="deviceForm.$dirty">
+                                      <span ng-show="deviceForm.id.$error.required">This is a required field</span>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+ 
+                      <div class="row">
+                          <div class="form-actions floatRight">
+                              <input type="submit"  value="Add" class="btn btn-primary btn-sm" ng-enabled="deviceForm.$invalid">
+                              <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="deviceForm.$pristine">Reset Form</button>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
        
       <script src="<c:url value='/3rd/angular/angular.js'/>"></script>
       <script src="<c:url value='/static/js/misc_module.js'/>"></script>
       <script src="<c:url value='/static/js/service/push_message_service.js'/>"></script>
       <script src="<c:url value='/static/js/controller/push_message_controller.js'/>"></script>
+      <script src="<c:url value='/static/js/service/device_service.js'/>"></script>
+      <script src="<c:url value='/static/js/controller/device_controller.js'/>"></script>
 </body>
 </html>
