@@ -8,12 +8,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.dy.oa.annotation.OaController;
+import com.dy.oa.common.OaConstants;
 import com.dy.oa.model.Device;
 import com.dy.oa.model.Message;
 import com.dy.oa.model.ResponseMessage;
 import com.dy.oa.service.DeviceService;
 import com.dy.oa.service.MessageService;
 
+@OaController
 @Controller
 @RequestMapping("/misc")
 public class MiscController {
@@ -33,7 +36,7 @@ public class MiscController {
     public  ResponseMessage addMessage(@RequestBody Message message) throws Exception {
 		ResponseMessage response = ResponseMessage.createDefault();
 		service.addMessage(message);
-		response.setResult(0);
+		response.setResult(OaConstants.MESSAGE_SUCCESS);
 		return response;	
     }
 	
@@ -42,7 +45,7 @@ public class MiscController {
     public  ResponseMessage addDevice(@RequestBody Device device) throws Exception {
 		ResponseMessage response = ResponseMessage.createDefault();
 		deviceService.addDevice(device);
-		response.setResult(0);
+		response.setResult(OaConstants.MESSAGE_SUCCESS);
 		return response;
     }
 }

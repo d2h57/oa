@@ -9,7 +9,9 @@
             http://www.springframework.org/schema/context   
             http://www.springframework.org/schema/context/spring-context.xsd  
             http://www.springframework.org/schema/mvc  
-            http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+            http://www.springframework.org/schema/mvc/spring-mvc.xsd
+            http://www.springframework.org/schema/aop
+        	http://www.springframework.org/schema/aop/spring-aop.xsd">
             
 	<context:component-scan base-package="com.dy.oa.controller" />
     
@@ -22,7 +24,41 @@
     <mvc:resources mapping="/static/**" location="/static/" />
     <mvc:resources mapping="/3rd/**" location="/3rd/" /> 
     
-	<mvc:annotation-driven />
+    <bean id="controllerAdvice" class="com.dy.oa.aop.ControllerAdvice" />
+
+	<aop:config>
+		<aop:aspect id="messageAspect" ref="controllerAdvice">
+			<aop:around method="aroundHandler"
+				pointcut="@annotation(com.dy.oa.annotation.OaController)" />
+		</aop:aspect>
+	</aop:config>
+    
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+	    <property name="targetObject" ref="ObjectMapper" />
+	    <property name="targetMethod" value="configure" />
+	    <property name="arguments">
+	        <list>
+	            <value type="com.fasterxml.jackson.databind.DeserializationFeature">FAIL_ON_UNKNOWN_PROPERTIES</value>
+	            <value>false</value>
+	        </list>
+	    </property>
+	</bean>
+
+	<bean id="ObjectMapper" class="com.fasterxml.jackson.databind.ObjectMapper">
+		<property name="serializationInclusion">
+			<value type="com.fasterxml.jackson.annotation.JsonInclude.Include">NON_NULL</value>
+		</property>
+	</bean>
+	                
+	<mvc:annotation-driven>
+	    <mvc:message-converters register-defaults="true">
+	        <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+	            <property name="objectMapper" ref="ObjectMapper">
+	            </property>
+	        </bean>
+	    </mvc:message-converters>
+	</mvc:annotation-driven>
+	
 	<mvc:default-servlet-handler />
 
 </beans>
