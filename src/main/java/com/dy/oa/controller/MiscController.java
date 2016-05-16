@@ -16,7 +16,6 @@ import com.dy.oa.model.ResponseMessage;
 import com.dy.oa.service.DeviceService;
 import com.dy.oa.service.MessageService;
 
-@OaController
 @Controller
 @RequestMapping("/misc")
 public class MiscController {
@@ -40,8 +39,9 @@ public class MiscController {
 		return response;	
     }
 	
-	@RequestMapping(value = "/device", method = RequestMethod.POST)
+	@OaController
 	@ResponseBody
+	@RequestMapping(value = "/device", method = RequestMethod.POST)
     public  ResponseMessage addDevice(@RequestBody Device device) throws Exception {
 		ResponseMessage response = ResponseMessage.createDefault();
 		deviceService.addDevice(device);
