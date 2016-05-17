@@ -16,4 +16,10 @@ public class Device {
 	public void setType(int type) {
 		this.type = type;
 	}
+	@Override
+	public String toString() {
+		return new StringBuilder("Device [id=").append(id)
+				.append(", type=").append(type).append("]")
+				.toString();
+	}
 }

@@ -1,20 +1,8 @@
 {
   "configuration": {
     "name": "Default",
-    "properties": {
-      "property": [
-        {
-          "name": "log-path",
-          "value": "logs"
-        },
-        {
-          "name": "archive",
-          "value": "${log-path}/archive"
-        }
-      ]
-    },
     "appenders": {
-      "Console": {
+    	 "Console": {
         "name": "Console-Appender",
         "target": "SYSTEM_OUT",
         "PatternLayout": {
@@ -23,8 +11,8 @@
       },
       "RollingFile": {
         "name": "RollingFile-Appender",
-        "fileName": "${log-path}/rollingfile.log",
-        "filePattern": "${archive}/rollingfile.log.%d{yyyy-MM-dd-hh-mm}.gz",
+        "fileName": "F:/code/oa/oa.log",
+        "filePattern": "F:/code/oa/oa.log.%d{yyyy-MM-dd-hh-mm}.gz",
         "PatternLayout": {
           "pattern": "[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"
         },
@@ -39,20 +27,10 @@
       }
     },
     "loggers": {
-      "logger": {
-        "name": "guru.springframework.blog.log4j2json",
-        "level": "debug",
-        "additivity": "false",
-        "appender-ref": [{
-          "ref": "Console-Appender", "level":"debug"
-        },
-        {
-          "ref": "RollingFile-Appender", "level":"debug"
-        }]
-      },
       "root": {
         "level": "debug",
-        "appender-ref": {"ref": "Console-Appender"}
+        "appender-ref": [{"ref": "Console-Appender"},
+        {"ref": "RollingFile-Appender"}]
       }
     }
   }

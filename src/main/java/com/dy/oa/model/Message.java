@@ -30,4 +30,12 @@ public class Message {
 	public void setMsgType(int msgType) {
 		this.msgType = msgType;
 	}
+	
+	@Override
+	public String toString() {
+		return new StringBuilder().append("Message [audience=").append(audience)
+				.append(", msgContent=").append(msgContent)
+				.append(", appId=").append(appId).append(", msgType=")
+				.append(msgType).append("]").toString();
+	}
 }
