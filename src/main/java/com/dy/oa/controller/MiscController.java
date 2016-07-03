@@ -1,5 +1,7 @@
 package com.dy.oa.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
@@ -46,6 +48,17 @@ public class MiscController {
 		ResponseMessage response = ResponseMessage.createDefault();
 		deviceService.addDevice(device);
 		response.setResult(OaConstants.MESSAGE_SUCCESS);
+		return response;
+    }
+	
+	@OaController
+	@ResponseBody
+	@RequestMapping("/device")
+    public  ResponseMessage getDevice() throws Exception {
+		ResponseMessage response = ResponseMessage.createDefault();
+		List<Device> devices = deviceService.getDevice(0);
+		response.setResult(OaConstants.MESSAGE_SUCCESS);
+		response.setData(devices);
 		return response;
     }
 }

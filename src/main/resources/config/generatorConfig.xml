@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+    <context id="MysqlContext" targetRuntime="MyBatis3" defaultModelType="flat">
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <commentGenerator>
+            <property name="suppressDate" value="false"/>
+        </commentGenerator>
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/oa"
+                        userId="root"
+                        password="">
+        </jdbcConnection>
+
+        <javaModelGenerator targetPackage="com.dy.oa.model" targetProject="oa/src/main/java">
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="mapper"  targetProject="oa/src/main/resources"/>
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.dy.oa.dao"  targetProject="oa/src/main/java"/>
+
+<!-- 此处修改是针对单个表,设置是否要生成example类,要对所有表设置的话,直接设置context的targetRuntime属性为MyBatis3Simple即可 -->
+        <table tableName="student" enableCountByExample="false" 
+	enableUpdateByExample="false" enableDeleteByExample="false" 
+	enableSelectByExample="false" selectByExampleQueryId="false"/>
+	
+		<!-- <table tableName="student"/> -->
+    </context>
+</generatorConfiguration>

@@ -1,5 +1,7 @@
 package com.dy.oa.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -18,5 +20,10 @@ public class DeviceServiceImpl implements DeviceService {
 	@Override
 	public void addDevice(Device device) throws Exception {
 		dao.insert(device);
+	}
+
+	@Override
+	public List<Device> getDevice(int type) {
+		return dao.getDevice(type);
 	}
 }

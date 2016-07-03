@@ -5,4 +5,7 @@
 <insert id="insert" parameterType="com.dy.oa.model.Device">  
    INSERT INTO device (id,type) VALUES (#{id},#{type})  
 </insert>
+<select id="getDevice" resultType="Device" parameterType="int">
+	select * from Device where type > #{type}
+</select>
 </mapper>
